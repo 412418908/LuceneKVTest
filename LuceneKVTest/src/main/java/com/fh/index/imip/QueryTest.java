@@ -21,7 +21,7 @@ import java.util.List;
 public class QueryTest {
 
     public static void main(String[] args) throws Exception {
-        int THREAD_CNT = 2;
+        int THREAD_CNT = 1;
         int TOTOAL_QUERY = 5000000;
         for (int i=0; i<THREAD_CNT; i++){
             final int idx = i;
@@ -30,7 +30,7 @@ public class QueryTest {
                 @Override
                 public void run(){
                     try {
-                        new QueryTest().test("-" + idx, querys);
+                        new QueryTest().test(""/*"-" + idx*/, 100/*querys*/);
                     }catch (Throwable t){
                         t.printStackTrace();
                     }
@@ -44,7 +44,7 @@ public class QueryTest {
 
     public void test(String suffix, int maxquerys) throws Exception {
 
-        String indexDir = "z:/" + Config.FILE_PREFIX + "index-raw";
+        String indexDir = "d:/data/" + Config.FILE_PREFIX + "index-raw";
         String termFile = "d:/data/" + Config.FILE_PREFIX + "search-term-shuffled" + suffix + ".bcp";
         Directory directory = FSDirectory.open(Paths.get(indexDir)); //MMapDirectory.open(new File(indexDir));//
         IndexSearcher searcher = getIndexSearcher(directory);
@@ -69,7 +69,7 @@ public class QueryTest {
                 System.out.println("-------------ERR : not searched : " + line);
             }
 
-           //print(line, searcher, topDocs);
+           print(line, searcher, topDocs);
             searchedTerms++;
             if ((searchedTerms % 100000) == 0) {
                 System.out.println("100000 searched " + searchedTerms);
@@ -88,7 +88,7 @@ public class QueryTest {
         Document document = null;
         for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
             document = searcher.doc(scoreDoc.doc);
-            String result = " mobile:" + document.get("mobile");
+            String result = "" + document.getFields();//" mobile:" + document.get("mobile");
             System.out.println(line + ", " + result);
         }
     }

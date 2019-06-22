@@ -77,6 +77,9 @@ public class GenSearchTerms {
                 if (readed % 100000 == 1) {
                     System.out.println("100000 records has benn inserted, total=" + readed);
                 }
+				if (readed >= 5500000){
+					break;
+				}
             }
 
 

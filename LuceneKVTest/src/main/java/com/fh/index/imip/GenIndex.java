@@ -18,7 +18,7 @@ public class GenIndex {
 
     public static void main(String args[]) throws IOException {
         File bcpPath = new File("d:/data/" + Config.FILE_PREFIX + "raw.bcp");
-        File indexPath = new File("z:/" + Config.FILE_PREFIX + "index-raw");
+        File indexPath = new File("d:/data/" + Config.FILE_PREFIX + "index-raw");
 
 
         IndexWriterConfig config = new IndexWriterConfig(new WhitespaceAnalyzer());
@@ -49,11 +49,11 @@ public class GenIndex {
             }
 
 
-//            start = System.currentTimeMillis();
-//            System.out.println("start merge...");
-//            writer.forceMerge(readed/2000000 + 1);
-//            System.out.println("merge finished");
-//            System.out.println("elapse=" + (System.currentTimeMillis() - start) + "ms");
+            start = System.currentTimeMillis();
+            System.out.println("start merge...");
+            writer.forceMerge(1);
+            System.out.println("merge finished");
+            System.out.println("elapse=" + (System.currentTimeMillis() - start) + "ms");
 
         } catch (IOException e) {
             throw new RuntimeException("building index failed. ", e);

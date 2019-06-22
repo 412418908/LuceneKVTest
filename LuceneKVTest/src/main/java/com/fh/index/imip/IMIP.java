@@ -52,19 +52,19 @@ public class IMIP {
 
     public Document toDocument() {
         Document doc = new Document();
-        if (!imei.isEmpty()) {
-            doc.add(new StringField("imei", imei, Field.Store.NO));
-        }
-        if (!mac.isEmpty()) {
-            //doc.add(new StringField("mac", mac, Field.Store.NO));
-            doc.add(new LongPoint("mac", Long.parseLong(mac, 16)));
-        }
+//        if (!imei.isEmpty()) {
+//            doc.add(new StringField("imei", imei, Field.Store.NO));
+//        }
+//        if (!mac.isEmpty()) {
+//            //doc.add(new StringField("mac", mac, Field.Store.NO));
+//            doc.add(new LongPoint("mac", Long.parseLong(mac, 16)));
+//        }
         if (!imsi.isEmpty()) {
             //doc.add(new StringField("imsi", imsi, Field.Store.NO));
             doc.add(new LongPoint("imsi", Long.parseLong(imsi)));
         }
         if (!mobile.isEmpty()) {
-            doc.add(new StoredField("mobile", mobile));
+            //doc.add(new StoredField("mobile", Long.parseLong(mobile)));
         }
         return doc;
     }
